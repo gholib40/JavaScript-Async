@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise Method</title>
+</head>
+<body>
+
+    <table>
+        <tbody>
+            <tr>
+                <td>id :</td>
+                <td id="id"></td>
+            </tr>
+            <tr>
+                <td>tipe :</td>
+                <td id="tipe"></td>
+            </tr>
+            <tr>
+                <td>seri :</td>
+                <td id="seri"></td>
+            </tr>
+            <tr>
+                <td>harga :</td>
+                <td id="harga"></td>
+            </tr>
+        </tbody>
+    </table>
+    <h1 id="response"></h1>
+
+    <script>
+       function getProduct(product){
+           return new Promise(function(resolve,reject){
+            const ajax = new XMLHttpRequest()
+            ajax.open("GET",`api/${product}.json`)
+            ajax.onload = function(){
+                if (ajax.status === 200) {
+                    resolve(ajax.responseText)
+                }else{
+                    reject(`Failed load response with status : ${ajax.status}`)
+                }
+            }
+            ajax.send()
+        })
+       }
+
+     getProduct("product")
+     .then(function(json){
+        return JSON.parse(json)
+     })
+     .then(function(json){
+         document.getElementById("id").textContent = json.id
+         document.getElementById("tipe").textContent = json.tipe
+         document.getElementById("seri").textContent = json.seri
+         document.getElementById("harga").textContent = json.harga
+     })
+     .catch(function(error){
+         document.getElementById("id").textContent = error
+         document.getElementById("tipe").textContent = error
+         document.getElementById("seri").textContent = error
+         document.getElementById("harga").textContent = error
+     })
+
+     .finally(
+         document.getElementById("response").textContent = "Ini Data Nya"
+     )
+
+       
+
+        
+           
+        
+    </script>
+    
+</body>
+</html>

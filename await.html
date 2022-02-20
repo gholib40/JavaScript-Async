@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Await</title>
+</head>
+<body>
+
+    <script>
+      function getProduct(){
+          const request = new Request("api/product.json",{
+              method : "GET"
+          })
+          const response = fetch(request)
+          return response.then((response) => response.json())
+      }
+      getProduct()
+      .then((output) => console.info(output))
+
+     async function getProductName(){
+         try {
+             const product = await getProduct()
+             return product.seri
+         } catch (e) {
+            return "Gagal Mendapatkan Data"
+         }
+     }
+
+        getProductName()
+        .then((output) => console.info(output))
+        .finally((output) => console.info("Aplikasi Berjalan"))
+
+
+    //   function getProductPromise(){
+    //       const response = new Promise(function(resolve,reject){
+    //           getProduct()
+    //           .then((product) => resolve(product.harga))
+    //           .catch((gagal) => reject(gagal))
+    //       })
+    //       return response
+    //   }
+
+    //   getProductPromise()
+    //   .then((output) => console.info(output))
+
+    </script>
+    
+</body>
+</html>

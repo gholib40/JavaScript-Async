@@ -1,0 +1,49 @@
+<form>
+    <label for="username">username:
+        <input type="text" id="username" name="username">
+    </label>
+    <br>
+    <label for="password">passwod:
+        <input type="password" id="password" name="password">
+    </label>
+    <br>
+    <label for="profile">Foto:
+        <input type="file" id="profile" name="profile">
+    </label>
+    <br>
+    <input type="button" id="login" value="login">
+
+
+    </form>
+    <h1 id="response"></h1>
+
+
+    <script>
+       function login(){
+           const request = new Request("https://hookb.in/yDwyq9B7eaTG9yjj9DYP",{
+               method : "POST",
+               headers : {
+                   "Content-type" : "application/json",
+                   "Accept" : "application/json",
+               },
+               body : JSON.stringify({
+                   username : document.getElementById("username").value,
+                   password : document.getElementById("password").value,
+                   file : document.getElementById("profile").value,
+                   status : "Member Login",
+               }),
+           })
+           const response = fetch(request)
+
+           response
+           .then((response) => response.json())
+           .then(function(responseH1){
+               document.getElementById("response").textContent = responseH1.success
+           })
+           .catch(function(gagal){
+               document.getElementById("response").textContent = gagal
+           })
+       }
+       document.getElementById("login").onclick = login
+
+    </script>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise All</title>
+</head>
+<body>
+
+    <table>
+        <tbody>
+            <tr>
+                <td>id :</td>
+                <td id="id"></td>
+            </tr>
+            <tr>
+                <td>tipe :</td>
+                <td id="tipe"></td>
+            </tr>
+            <tr>
+                <td>seri :</td>
+                <td id="seri"></td>
+            </tr>
+            <tr>
+                <td>harga :</td>
+                <td id="harga"></td>
+            </tr>
+        </tbody>
+    </table>
+    <h1 id="response"></h1>
+
+    <script>
+       function getProduct(product){
+           return new Promise(function(resolve,reject){
+            const ajax = new XMLHttpRequest()
+            ajax.open("GET",`api/${product}.json`)
+            ajax.onload = function(){
+                if (ajax.status === 200) {
+                    resolve(ajax.responseText)
+                }else{
+                    reject(`Failed load response with status : ${ajax.status}`)
+                }
+            }
+            ajax.send()
+        })
+       }
+
+     const promise = Promise.all([
+     getProduct("product1"),
+     getProduct("product2"),
+     getProduct("product3")
+     ])
+    //  const promises = Promise.any([
+    //  getProduct("product1"),
+    //  getProduct("product2"),
+    //  getProduct("product3")
+    //  ])
+     promise.then(function(produts){
+         console.info(produts)
+     })
+
+    //  promises.then(function(grande){
+    //      console.info(grande)
+    //  })
+
+       
+
+        
+           
+        
+    </script>
+    
+</body>
+</html>

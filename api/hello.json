@@ -1,0 +1,15 @@
+
+    {
+        "fristName": "Adam",
+        "lastName":"galib",
+        "age":21,
+        "country":[
+            "indonesia",
+            "united kingdom of england"
+        ],
+        "nickName" :[
+            "doblank",
+            "golib",
+            "boy"
+        ]
+    }
